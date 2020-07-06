@@ -7,12 +7,18 @@
 //
 
 #import "FeedViewController.h"
+#import <Parse/Parse.h>
 
 @interface FeedViewController ()
 
 @end
 
 @implementation FeedViewController
+- (IBAction)logoutButton:(id)sender {
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        // PFUser.current() will now be nil
+    }];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
