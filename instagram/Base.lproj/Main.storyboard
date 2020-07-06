@@ -71,10 +71,10 @@
             </objects>
             <point key="canvasLocation" x="131.8840579710145" y="93.75"/>
         </scene>
-        <!--View Controller-->
+        <!--Feed View Controller-->
         <scene sceneID="Gl9-6A-htV">
             <objects>
-                <viewController id="Fg7-4X-Okg" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FeedViewController" id="Fg7-4X-Okg" customClass="FeedViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ZIU-Vk-fad">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4BC3C0F624B3CAEB00C201F9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */; };
+		4BC3C0F924B3D34A00C201F9 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3C0F824B3D34A00C201F9 /* FeedViewController.m */; };
 		4BD001AD24B3B0FF00208201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD001AC24B3B0FF00208201 /* AppDelegate.m */; };
 		4BD001B024B3B0FF00208201 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD001AF24B3B0FF00208201 /* SceneDelegate.m */; };
 		4BD001B624B3B0FF00208201 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4BD001B424B3B0FF00208201 /* Main.storyboard */; };
@@ -42,6 +43,8 @@
 		0DEE3FE8621C6372621EC78C /* Pods-instagramTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-instagramTests.debug.xcconfig"; path = "Target Support Files/Pods-instagramTests/Pods-instagramTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4BC3C0F424B3CAEB00C201F9 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		4BC3C0F724B3D34A00C201F9 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
+		4BC3C0F824B3D34A00C201F9 /* FeedViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FeedViewController.m; sourceTree = "<group>"; };
 		4BD001A824B3B0FF00208201 /* instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD001AB24B3B0FF00208201 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		4BD001AC24B3B0FF00208201 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -101,6 +104,8 @@
 			children = (
 				4BC3C0F424B3CAEB00C201F9 /* LoginViewController.h */,
 				4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */,
+				4BC3C0F724B3D34A00C201F9 /* FeedViewController.h */,
+				4BC3C0F824B3D34A00C201F9 /* FeedViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4BC3C0F624B3CAEB00C201F9 /* LoginViewController.m in Sources */,
+				4BC3C0F924B3D34A00C201F9 /* FeedViewController.m in Sources */,
 				4BD001AD24B3B0FF00208201 /* AppDelegate.m in Sources */,
 				4BD001BE24B3B10000208201 /* main.m in Sources */,
 				4BD001B024B3B0FF00208201 /* SceneDelegate.m in Sources */,

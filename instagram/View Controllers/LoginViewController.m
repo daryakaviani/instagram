@@ -49,7 +49,7 @@
 }
 
 - (void)networkError {
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"There was a network error!"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"There was an error!"
            message:@"Please try again!"
     preferredStyle:(UIAlertControllerStyleAlert)];
     // create a cancel action
