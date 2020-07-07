@@ -8,9 +8,11 @@
 
 #import "ComposeViewController.h"
 #import <UIKit/UIKit.h>
+#import "Post.h"
 
 @interface ComposeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *pickerView;
+@property (weak, nonatomic) IBOutlet UITextField *captionField;
 
 @end
 
@@ -21,6 +23,29 @@
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openImagePicker)];
     [self.pickerView addGestureRecognizer:profileTapGestureRecognizer];
     [self.pickerView setUserInteractionEnabled:YES];
+
+}
+- (IBAction)shareButton:(id)sender {
+    [Post postUserImage:self.pickerView.image withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+//        Post *post = [Post objectWithClassName:@"Post"];
+//        post[@"caption"] = self.captionField.text;
+//        post[@"image"] = self.pickerView.image;
+        [self dismissViewControllerAnimated:true completion:nil];
+    }];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 - (IBAction)cancelButton:(id)sender {
@@ -45,9 +70,9 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-
-    [self.pickerView setImage:originalImage];
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
+    
+    [self.pickerView setImage:editedImage];
     
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];

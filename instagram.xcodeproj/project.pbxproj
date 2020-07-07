@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4B64D5A524B3DC8300932769 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D5A424B3DC8300932769 /* Post.m */; };
 		4B64D5A924B3DEDB00932769 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D5A824B3DEDB00932769 /* ComposeViewController.m */; };
+		4B9D3BB124B429F200AD3540 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9D3BB024B429F200AD3540 /* PostCell.m */; };
 		4BC3C0F624B3CAEB00C201F9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */; };
 		4BC3C0F924B3D34A00C201F9 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3C0F824B3D34A00C201F9 /* FeedViewController.m */; };
 		4BD001AD24B3B0FF00208201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD001AC24B3B0FF00208201 /* AppDelegate.m */; };
@@ -47,6 +48,8 @@
 		4B64D5A424B3DC8300932769 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		4B64D5A724B3DEDB00932769 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
 		4B64D5A824B3DEDB00932769 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
+		4B9D3BAF24B429F200AD3540 /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		4B9D3BB024B429F200AD3540 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		4BC3C0F424B3CAEB00C201F9 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4BC3C0F724B3D34A00C201F9 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
@@ -105,11 +108,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4B64D5A624B3DC8C00932769 /* Views */ = {
+		4B64D5A624B3DC8C00932769 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				4B64D5A324B3DC8300932769 /* Post.h */,
 				4B64D5A424B3DC8300932769 /* Post.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4B9D3BAE24B4274C00AD3540 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4B9D3BAF24B429F200AD3540 /* PostCell.h */,
+				4B9D3BB024B429F200AD3540 /* PostCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -152,7 +164,8 @@
 		4BD001AA24B3B0FF00208201 /* instagram */ = {
 			isa = PBXGroup;
 			children = (
-				4B64D5A624B3DC8C00932769 /* Views */,
+				4B9D3BAE24B4274C00AD3540 /* Views */,
+				4B64D5A624B3DC8C00932769 /* Models */,
 				4BC3C0F324B3CAC900C201F9 /* View Controllers */,
 				4BD001AB24B3B0FF00208201 /* AppDelegate.h */,
 				4BD001AC24B3B0FF00208201 /* AppDelegate.m */,
@@ -449,6 +462,7 @@
 				4BC3C0F624B3CAEB00C201F9 /* LoginViewController.m in Sources */,
 				4B64D5A524B3DC8300932769 /* Post.m in Sources */,
 				4BC3C0F924B3D34A00C201F9 /* FeedViewController.m in Sources */,
+				4B9D3BB124B429F200AD3540 /* PostCell.m in Sources */,
 				4BD001AD24B3B0FF00208201 /* AppDelegate.m in Sources */,
 				4B64D5A924B3DEDB00932769 /* ComposeViewController.m in Sources */,
 				4BD001BE24B3B10000208201 /* main.m in Sources */,
