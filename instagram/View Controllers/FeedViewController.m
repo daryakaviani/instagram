@@ -35,6 +35,7 @@
 - (void)refresh {
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
+    [query orderByDescending:@"createdAt"];
     //[query whereKey:@"caption" greaterThan:@100];
     query.limit = 20;
 
@@ -52,8 +53,8 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
     Post *post = self.posts[indexPath.row];
-    cell.postCaption.text = post[@"caption"];
-    cell.postImage.file = post[@"image"];
+    cell.post = post;
+    [cell setPost:post];
 //    PFUser *user = post[@"user"];
 //    if (user != nil) {
 //        // User found! update username label with username

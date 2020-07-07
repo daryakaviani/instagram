@@ -21,4 +21,11 @@
     // Configure the view for the selected state
 }
 
+- (void)setPost:(Post *)post {
+    _post = post;
+    self.postCaption.text = post[@"caption"];
+    self.postImage.file = post[@"image"];
+    [self.postImage loadInBackground];
+}
+
 @end

@@ -70,7 +70,7 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(250, 250)];
     
     [self.pickerView setImage:editedImage];
     
