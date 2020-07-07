@@ -162,6 +162,7 @@
                                         <connections>
                                             <outlet property="postCaption" destination="Uds-WT-Zt2" id="Zkw-Ds-tk7"/>
                                             <outlet property="postImage" destination="PRq-2z-VKA" id="qCG-so-0pZ"/>
+                                            <segue destination="8q5-v3-gya" kind="show" identifier="detailSegue" id="VtP-Aj-djc"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -196,6 +197,62 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bie-DN-DpB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1682.608695652174" y="93.75"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="bCA-ns-0ne">
+            <objects>
+                <viewController modalPresentationStyle="fullScreen" id="8q5-v3-gya" customClass="DetailViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fBo-8d-OIb">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ahs-uX-juP">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yaQ-yE-xHb" userLabel="Content View">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="here is my cute little caption y'all" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CUN-GA-g2i">
+                                                <rect key="frame" x="138" y="520" width="248.5" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="20:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g85-nq-pSe">
+                                                <rect key="frame" x="29" y="520" width="61" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tz3-bV-xnq" customClass="PFImageView">
+                                                <rect key="frame" x="0.0" y="8" width="414" height="414"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                    </view>
+                                </subviews>
+                                <viewLayoutGuide key="contentLayoutGuide" id="6mr-KV-hww"/>
+                                <viewLayoutGuide key="frameLayoutGuide" id="1jx-64-LEI"/>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="lLF-Lx-hK4"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Ybw-Px-vKg"/>
+                    <connections>
+                        <outlet property="captionLabel" destination="CUN-GA-g2i" id="Zfc-SA-fBK"/>
+                        <outlet property="postImage" destination="tz3-bV-xnq" id="bZm-a8-k9d"/>
+                        <outlet property="timestampLabel" destination="g85-nq-pSe" id="xzc-Hf-Qya"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQp-Kv-Bcw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2350.7246376811595" y="93.75"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bvb-Ey-2g9">

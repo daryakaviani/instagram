@@ -25,6 +25,7 @@
     _post = post;
     self.postCaption.text = post[@"caption"];
     self.postImage.file = post[@"image"];
+    self.postTimestamp = post[@"createdAt"];
     [self.postImage loadInBackground];
 }
 

@@ -27,9 +27,6 @@
 }
 - (IBAction)shareButton:(id)sender {
     [Post postUserImage:self.pickerView.image withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-//        Post *post = [Post objectWithClassName:@"Post"];
-//        post[@"caption"] = self.captionField.text;
-//        post[@"image"] = self.pickerView.image;
         [self dismissViewControllerAnimated:true completion:nil];
     }];
 }
@@ -70,7 +67,7 @@
     
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(250, 250)];
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
     
     [self.pickerView setImage:editedImage];
     
