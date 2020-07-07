@@ -8,6 +8,7 @@
 
 #import "PostCell.h"
 #import "Post.h"
+#import <DateTools.h>
 
 @implementation PostCell
 
@@ -25,7 +26,9 @@
     _post = post;
     self.postCaption.text = post[@"caption"];
     self.postImage.file = post[@"image"];
-    self.postTimestamp = post[@"createdAt"];
+    NSDate *tempTime = self.post.createdAt;
+    NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime];
+    self.postTimestamp.text = timeAgo.timeAgoSinceNow;
     [self.postImage loadInBackground];
 }
 

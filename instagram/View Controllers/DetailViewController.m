@@ -9,6 +9,7 @@
 #import "DetailViewController.h"
 #import <Parse/Parse.h>
 #import "PFImageView.h"
+#import <DateTools.h>
 
 @interface DetailViewController ()
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
@@ -23,20 +24,9 @@
     [super viewDidLoad];
     self.captionLabel.text = self.post[@"caption"];
     self.postImage.file = self.post[@"image"];
-    [self.postImage loadInBackground];
-    NSDate *createdAtOriginalString = self.post[@"createdAt"];
-    // Format createdAt date string
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    // Configure the input format to parse the date string
-    formatter.dateFormat = @"E MMM d HH:mm:ss Z y";
-    // Convert String to Date
-    NSDate *date = [formatter dateFromString:createdAtOriginalString];
-    // Configure output format
-    formatter.dateStyle = NSDateFormatterShortStyle;
-    formatter.timeStyle = NSDateFormatterNoStyle;
-    // Convert Date to String
-    self.timestampLabel.text = [formatter stringFromDate:date];
-    //self.timeCreated = [createdAtOriginalString substringWithRange:NSMakeRange(10, 9)];
+    NSDate *tempTime = self.post.createdAt;
+    NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime];
+    self.timestampLabel.text = timeAgo.timeAgoSinceNow;
 }
 
 

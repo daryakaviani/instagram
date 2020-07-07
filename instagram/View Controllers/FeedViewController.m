@@ -41,6 +41,7 @@
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
+    [query includeKey:@"author"];
     //[query whereKey:@"caption" greaterThan:@100];
     query.limit = 20;
 
@@ -61,13 +62,14 @@
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     [cell setPost:post];
-//    PFUser *user = post[@"user"];
-//    if (user != nil) {
-//        // User found! update username label with username
-//        cell.nameLabel.text = user.username;
-//    } else {
-//        // No user found, set default username
-//        cell.nameLabel.text = @"🤖";
+    PFUser *user = post[@"author"];
+    if (user != nil) {
+        // User found! update username label with username
+        cell.postUsername.text = user.username;
+    } else {
+        // No user found, set default username
+        cell.postUsername.text = @"🤖";
+    }
     return cell;
 }
 
