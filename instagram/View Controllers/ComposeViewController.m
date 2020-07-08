@@ -23,8 +23,8 @@
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openImagePicker)];
     [self.pickerView addGestureRecognizer:profileTapGestureRecognizer];
     [self.pickerView setUserInteractionEnabled:YES];
-
 }
+
 - (IBAction)shareButton:(id)sender {
     [Post postUserImage:self.pickerView.image withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         [self dismissViewControllerAnimated:true completion:nil];

@@ -10,6 +10,7 @@
 #import <Parse/Parse.h>
 #import "PostCell.h"
 #import "DetailViewController.h"
+#import "PFImageView.h"
 
 @interface FeedViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -28,7 +29,6 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (IBAction)logoutButton:(id)sender {
@@ -76,6 +76,10 @@
     } else {
         // No user found, set default username
         cell.postUsername.text = @"🤖";
+    }
+    if (user[@"profilePic"] != nil) {
+        cell.profileView.file = user[@"profilePic"];
+        [cell.profileView loadInBackground];
     }
     return cell;
 }
