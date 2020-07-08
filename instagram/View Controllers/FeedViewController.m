@@ -63,13 +63,13 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    cell.preservesSuperviewLayoutMargins = false;
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
     Post *post = self.posts[indexPath.row];
     cell.post = post;
     [cell setPost:post];
     PFUser *user = post[@"author"];
-    cell.preservesSuperviewLayoutMargins = false;
-    cell.separatorInset = UIEdgeInsetsZero;
-    cell.layoutMargins = UIEdgeInsetsZero;
     if (user != nil) {
         // User found! update username label with username
         cell.postUsername.text = user.username;

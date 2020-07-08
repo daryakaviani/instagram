@@ -155,18 +155,17 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yQn-k6-khd">
-                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="39"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="53"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ocO-oW-rc1">
-                                                            <rect key="frame" x="18" y="12" width="92" height="21"/>
+                                                            <rect key="frame" x="18" y="13" width="92" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -251,6 +250,9 @@
                                                 <state key="selected" image="heart.fill" catalog="system">
                                                     <color key="titleShadowColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="likeButton:" destination="8q5-v3-gya" eventType="touchUpInside" id="L55-d7-4LE"/>
+                                                </connections>
                                             </button>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tz3-bV-xnq" customClass="PFImageView">
                                                 <rect key="frame" x="0.0" y="8" width="414" height="414"/>
@@ -290,9 +292,11 @@
                     <navigationItem key="navigationItem" id="Ybw-Px-vKg"/>
                     <connections>
                         <outlet property="captionLabel" destination="CUN-GA-g2i" id="Zfc-SA-fBK"/>
+                        <outlet property="likeButton" destination="Q5n-HN-AAm" id="kyf-DB-Sx0"/>
                         <outlet property="likesLabel" destination="nTv-QW-pe9" id="ZF9-Si-WIM"/>
                         <outlet property="postImage" destination="tz3-bV-xnq" id="bZm-a8-k9d"/>
                         <outlet property="timestampLabel" destination="NvV-wO-X0l" id="1GS-9s-C3A"/>
+                        <outlet property="usernameLabel" destination="gaj-Qd-UTL" id="6Fx-Oa-baJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQp-Kv-Bcw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
