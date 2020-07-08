@@ -417,6 +417,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileButton" destination="E3x-m4-qhZ" id="eSj-dS-u06"/>
                         <outlet property="profileView" destination="2cI-bG-wiZ" id="P8K-LN-3hr"/>
                         <outlet property="tableView" destination="0R1-6t-oHn" id="SGF-yI-Qh6"/>
                         <outlet property="usernameLabel" destination="FSz-bI-gcP" id="7BK-gq-YZV"/>

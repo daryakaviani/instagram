@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "PostCell.h"
+#import <UIKit/UIKit.h>
 
 @interface ProfileViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -15,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (nonatomic, strong) NSArray *posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *profileButton;
 @property (weak, nonatomic) PFFileObject *pickerView;
 @end
 
@@ -24,6 +26,9 @@
     [super viewDidLoad];
     if (self.user == nil) {
         self.user = [PFUser currentUser];
+    } else {
+        [self.profileButton setEnabled:NO];
+        [self.profileButton setTintColor: [UIColor clearColor]];
     }
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -116,6 +121,10 @@
         //[user saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         self.profileView.file = user[@"profilePic"];
         [self.profileView loadInBackground];
+        if (user[@"profilePic"] != nil) {
+            cell.profileView.file = user[@"profilePic"];
+            [cell.profileView loadInBackground];
+        }
         //}];
     } else {
         // No user found, set default username
