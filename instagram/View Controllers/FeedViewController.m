@@ -28,7 +28,7 @@
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchPosts) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
-    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+//    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
 }
 
 - (IBAction)logoutButton:(id)sender {
@@ -67,6 +67,9 @@
     cell.post = post;
     [cell setPost:post];
     PFUser *user = post[@"author"];
+    cell.preservesSuperviewLayoutMargins = false;
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
     if (user != nil) {
         // User found! update username label with username
         cell.postUsername.text = user.username;
