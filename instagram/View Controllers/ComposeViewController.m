@@ -9,6 +9,7 @@
 #import "ComposeViewController.h"
 #import <UIKit/UIKit.h>
 #import "Post.h"
+#import "MBProgressHUD.h"
 
 @interface ComposeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *pickerView;
@@ -26,9 +27,16 @@
 }
 
 - (IBAction)shareButton:(id)sender {
-    [Post postUserImage:self.pickerView.image withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-        [self dismissViewControllerAnimated:true completion:nil];
-    }];
+    MBProgressHUD *hud = [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 0.5 * NSEC_PER_SEC);
+    hud.animationType = MBProgressHUDModeAnnularDeterminate;
+    hud.label.text = @"Posting Your Photo to Instragam";
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [Post postUserImage:self.pickerView.image withCaption:self.captionField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            [self dismissViewControllerAnimated:true completion:nil];
+        }];
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
+    });
 }
 
 - (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
