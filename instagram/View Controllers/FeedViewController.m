@@ -11,11 +11,13 @@
 #import "PostCell.h"
 #import "DetailViewController.h"
 #import "PFImageView.h"
+#import "ProfileViewController.h"
 
-@interface FeedViewController ()<UITableViewDelegate, UITableViewDataSource>
+@interface FeedViewController ()<UITableViewDelegate, UITableViewDataSource, PostCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *posts;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (strong, nonatomic) PFUser* user;
 
 @end
 
@@ -46,7 +48,6 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
-    //[query whereKey:@"caption" greaterThan:@100];
     query.limit = 20;
 
     // fetch data asynchronously
@@ -63,6 +64,7 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     PostCell *cell = [tableView dequeueReusableCellWithIdentifier:@"PostCell"];
+    cell.delegate = self;
     cell.preservesSuperviewLayoutMargins = false;
     cell.separatorInset = UIEdgeInsetsZero;
     cell.layoutMargins = UIEdgeInsetsZero;
@@ -88,16 +90,24 @@
     return self.posts.count;
 }
 
+- (void)postCell:(PostCell *)postCell didTap:(PFUser *)user{
+    self.user = user;
+    [self performSegueWithIdentifier:@"profileSegue" sender:user];
+}
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    UITableViewCell *tappedCell = sender;
+    NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+    Post *post = self.posts[indexPath.row];
       if ([segue.identifier isEqualToString:@"detailSegue"]) {
-          UITableViewCell *tappedCell = sender;
-          NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-          Post *post = self.posts[indexPath.row];
           DetailViewController *detailViewController = [segue destinationViewController];
           detailViewController.post = post;
+      } else if ([segue.identifier isEqualToString:@"profileSegue"]) {
+          ProfileViewController *profileViewController = [segue destinationViewController];
+          profileViewController.user = self.user;
       }
 }
 

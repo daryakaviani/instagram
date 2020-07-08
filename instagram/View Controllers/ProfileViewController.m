@@ -22,6 +22,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    if (self.user == nil) {
+        self.user = [PFUser currentUser];
+    }
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self fetchPosts];
@@ -82,7 +85,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Post"];
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"author"];
-    [query whereKey:@"author" equalTo:[PFUser currentUser]];
+    [query whereKey:@"author" equalTo:self.user];
     query.limit = 20;
 
     // fetch data asynchronously

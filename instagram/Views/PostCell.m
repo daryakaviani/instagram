@@ -14,7 +14,9 @@
 
 - (void)awakeFromNib {
     [super awakeFromNib];
-    // Initialization code
+     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(didTapUserProfile:)];
+    [self.profileView addGestureRecognizer:profileTapGestureRecognizer];
+    [self.profileView setUserInteractionEnabled:YES];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -30,6 +32,12 @@
     NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime];
     self.postTimestamp.text = timeAgo.timeAgoSinceNow;
     [self.postImage loadInBackground];
+}
+
+
+// ADDING DIRECT TO USER PROFILE FEATURE
+- (void) didTapUserProfile:(UITapGestureRecognizer *)sender{
+    [self.delegate postCell:self didTap:self.post.author];
 }
 
 @end
