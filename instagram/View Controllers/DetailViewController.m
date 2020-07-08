@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 
 @end
 
@@ -24,8 +25,9 @@
     [super viewDidLoad];
     self.captionLabel.text = self.post[@"caption"];
     self.postImage.file = self.post[@"image"];
+    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post[@"likeCount"]];
     NSDate *tempTime = self.post.createdAt;
-    NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime];
+    NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime]; 
     self.timestampLabel.text = timeAgo.timeAgoSinceNow;
 }
 
