@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		4B546C9724B638AE00468981 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B546C9624B638AE00468981 /* ProfileViewController.m */; };
 		4B546C9A24B6685600468981 /* InfiniteScrollActivityView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B546C9924B6685600468981 /* InfiniteScrollActivityView.m */; };
+		4B546C9D24B6803A00468981 /* CommentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B546C9C24B6803A00468981 /* CommentCell.m */; };
+		4B546CA024B683B300468981 /* Comment.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B546C9F24B683B300468981 /* Comment.m */; };
 		4B64D5A524B3DC8300932769 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D5A424B3DC8300932769 /* Post.m */; };
 		4B64D5A924B3DEDB00932769 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D5A824B3DEDB00932769 /* ComposeViewController.m */; };
 		4B9D3BB124B429F200AD3540 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9D3BB024B429F200AD3540 /* PostCell.m */; };
@@ -51,6 +53,10 @@
 		4B546C9624B638AE00468981 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		4B546C9824B6685600468981 /* InfiniteScrollActivityView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = InfiniteScrollActivityView.h; sourceTree = "<group>"; };
 		4B546C9924B6685600468981 /* InfiniteScrollActivityView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = InfiniteScrollActivityView.m; sourceTree = "<group>"; };
+		4B546C9B24B6803A00468981 /* CommentCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CommentCell.h; sourceTree = "<group>"; };
+		4B546C9C24B6803A00468981 /* CommentCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CommentCell.m; sourceTree = "<group>"; };
+		4B546C9E24B683B300468981 /* Comment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Comment.h; sourceTree = "<group>"; };
+		4B546C9F24B683B300468981 /* Comment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Comment.m; sourceTree = "<group>"; };
 		4B64D5A324B3DC8300932769 /* Post.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Post.h; sourceTree = "<group>"; };
 		4B64D5A424B3DC8300932769 /* Post.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Post.m; sourceTree = "<group>"; };
 		4B64D5A724B3DEDB00932769 /* ComposeViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ComposeViewController.h; sourceTree = "<group>"; };
@@ -122,6 +128,8 @@
 			children = (
 				4B64D5A324B3DC8300932769 /* Post.h */,
 				4B64D5A424B3DC8300932769 /* Post.m */,
+				4B546C9E24B683B300468981 /* Comment.h */,
+				4B546C9F24B683B300468981 /* Comment.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -133,6 +141,8 @@
 				4B9D3BB024B429F200AD3540 /* PostCell.m */,
 				4B546C9824B6685600468981 /* InfiniteScrollActivityView.h */,
 				4B546C9924B6685600468981 /* InfiniteScrollActivityView.m */,
+				4B546C9B24B6803A00468981 /* CommentCell.h */,
+				4B546C9C24B6803A00468981 /* CommentCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -481,6 +491,8 @@
 				4BC3C0F924B3D34A00C201F9 /* FeedViewController.m in Sources */,
 				4B546C9724B638AE00468981 /* ProfileViewController.m in Sources */,
 				4B9D3BB124B429F200AD3540 /* PostCell.m in Sources */,
+				4B546C9D24B6803A00468981 /* CommentCell.m in Sources */,
+				4B546CA024B683B300468981 /* Comment.m in Sources */,
 				4BD001AD24B3B0FF00208201 /* AppDelegate.m in Sources */,
 				4B64D5A924B3DEDB00932769 /* ComposeViewController.m in Sources */,
 				4BD001BE24B3B10000208201 /* main.m in Sources */,
