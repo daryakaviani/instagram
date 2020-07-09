@@ -11,7 +11,6 @@
 @dynamic image;
 @dynamic likeCount;
 @dynamic commentCount;
-@dynamic liked;
 
 + (nonnull NSString *)parseClassName {
     return @"Post";
@@ -24,12 +23,23 @@
     newPost.caption = caption;
     newPost.likeCount = @(0);
     newPost.commentCount = @(0);
-    newPost.liked = false;
     [newPost saveInBackgroundWithBlock: completion];
 }
 
-+ (void) postUserLike: ( PFUser * _Nullable)user withCompletion: (PFBooleanResultBlock  _Nullable)completion {
-    
++ (void) postUserLike: ( PFUser * _Nullable)user withPost: ( Post * _Nullable ) post withCompletion: (PFBooleanResultBlock  _Nullable)completion {
+    PFRelation *relation = [post relationForKey:@"likedBy"];
+    [relation addObject:user];
+    int val = [post.likeCount intValue];
+    post.likeCount = [NSNumber numberWithInt:(val + 1)];
+    [post saveInBackground];
+}
+
++ (void) postUserUnlike: ( PFUser * _Nullable)user withPost: ( Post * _Nullable ) post withCompletion: (PFBooleanResultBlock  _Nullable)completion {
+    PFRelation *relation = [post relationForKey:@"likedBy"];
+    [relation removeObject:user];
+    int val = [post.likeCount intValue];
+    post.likeCount = [NSNumber numberWithInt:(val - 1)];
+    [post saveInBackground];
 }
 
 + (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {

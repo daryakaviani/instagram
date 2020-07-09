@@ -35,28 +35,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self fetchComments];
+    [self fetchLikes];
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchComments) forControlEvents:UIControlEventValueChanged];
     [self.tableView insertSubview:self.refreshControl atIndex:0];
     [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
     self.captionLabel.text = self.post.caption;
     self.postImage.file = self.post.image;
-    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
     NSDate *tempTime = self.post.createdAt;
     NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime]; 
     self.timestampLabel.text = timeAgo.timeAgoSinceNow;
     PFUser *user = self.post[@"author"];
-    if (self.post.liked) {
-            self.post.liked = NO;
-    //        self.post.likeCount = @(self.post.likeCount + 1);
-        } else {
-            self.post.liked = YES;
-    //        self.post.likeCount += 1;
-        }
     if (user != nil) {
         // User found! update username label with username
         self.usernameLabel.text = user.username;
@@ -68,25 +60,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-}
-
-- (void)fetchComments {
-    // construct query
-    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
-    [query orderByDescending:@"createdAt"];
-    [query whereKey:@"post" equalTo:self.post];
-    query.limit = 20;
-    // fetch data asynchronously
-    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
-        if (comments != nil) {
-            self.comments = comments;
-            self.commentLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount, nil];
-            [self.tableView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-        }
-        [self.refreshControl endRefreshing];
-    }];
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -118,45 +91,68 @@
 }
 
 - (IBAction)likeButton:(id)sender {
-    if (self.post.liked) {
-        self.post.liked = NO;
-        self.likeButton.selected = YES;
-        int val = [self.post.likeCount intValue];
-        self.post.likeCount = [NSNumber numberWithInt:(val - 1)];
-        [self.post saveInBackground];
-    } else {
-        self.post.liked = YES;
-        self.likeButton.selected = NO;
-        int val = [self.post.likeCount intValue];
-        self.post.likeCount = [NSNumber numberWithInt:(val + 1)];
-        [self.post saveInBackground];
-    }
-    [self refreshLikeData];
+    __block bool containsUser = false;
+    PFRelation *relation = [self.post relationForKey:@"likedBy"];
+    PFQuery *query = [relation query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (PFUser *user in objects) {
+            if ([user.username isEqual:[PFUser currentUser].username]) {
+                self.likeButton.selected = NO;
+                containsUser = true;
+                NSLog(@"Found user");
+                [Post postUserUnlike:[PFUser currentUser] withPost:self.post withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                    [self.tableView reloadData];
+                }];
+            }
+            break;
+        }
+        if (!containsUser) {
+            NSLog(@"Did not find user");
+            self.likeButton.selected = YES;
+            [Post postUserLike:[PFUser currentUser] withPost:self.post withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                [self.tableView reloadData];
+            }];
+        }
+        self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    }];
+ }
+        
+        
+- (void)fetchComments {
+    // construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+    [query orderByDescending:@"createdAt"];
+    [query whereKey:@"post" equalTo:self.post];
+    query.limit = 20;
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        if (comments != nil) {
+            self.comments = comments;
+            self.commentLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount, nil];
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        [self.refreshControl endRefreshing];
+    }];
 }
-
-- (void)refreshLikeData {
-//    self.likesLabel.text = [NSString stringWithFormat:@"%i", self.tweet.favoriteCount];
-//    if (self.tweet.favorited) {
-//        self.favorButton.selected = YES;
-//        [[APIManager shared] favorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
-//            if(error){
-//                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
-//            }
-//            else{
-//                NSLog(@"Successfully favorited the following Tweet: %@", tweet.text);
-//            }
-//        }];
-//    } else {
-//        self.favorButton.selected = NO;
-//        [[APIManager shared] unfavorite:self.tweet completion:^(Tweet *tweet, NSError *error) {
-//            if(error){
-//                 NSLog(@"Error favoriting tweet: %@", error.localizedDescription);
-//            }
-//            else{
-//                NSLog(@"Successfully unfavorited the following Tweet: %@", tweet.text);
-//            }
-//        }];
-//    }
+- (void)fetchLikes {
+    __block bool containsUser = false;
+    PFRelation *relation = [self.post relationForKey:@"likedBy"];
+    PFQuery *query = [relation query];
+    [query findObjectsInBackgroundWithBlock:^(NSArray * _Nullable objects, NSError * _Nullable error) {
+        for (PFUser *user in objects) {
+            if ([user.username isEqual:[PFUser currentUser].username]) {
+               self.likeButton.selected = YES;
+               containsUser = true;
+            }
+            break;
+        }
+        if (!containsUser) {
+            self.likeButton.selected = NO;
+        }
+        self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    }];
 }
 
 #pragma mark - Navigation
