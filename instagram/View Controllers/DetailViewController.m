@@ -75,7 +75,6 @@
     // construct query
     PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
     [query orderByDescending:@"createdAt"];
-//    [query includeKey:@"author"];
     [query whereKey:@"post" equalTo:self.post];
     query.limit = 20;
     // fetch data asynchronously
@@ -110,10 +109,12 @@
 - (IBAction)commentButton:(id)sender {
     [Comment postUserComment:self.commentField.text withUsername:[PFUser currentUser].username withPost:self.post withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         self.commentField.text = @"";
+        int val = [self.post.commentCount intValue];
+        self.post.commentCount = [NSNumber numberWithInt:(val + 1)];
+        [self.post saveInBackground];
+        [self fetchComments];
+        [self.tableView reloadData];
     }];
-    [self fetchComments];
-    [self viewDidLoad];
-    [self.tableView reloadData];
 }
 
 - (IBAction)likeButton:(id)sender {
