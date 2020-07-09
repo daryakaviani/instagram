@@ -7,14 +7,18 @@
 //
 
 #import <Parse/Parse.h>
+#import "Post.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface Comment : PFObject
+@interface Comment : PFObject<PFSubclassing>
 
 @property (nonatomic, strong) NSString  * _Nullable text;
-@property (nonatomic, strong) PFFileObject  * _Nullable profile;
 @property (nonatomic, strong) NSString  * _Nullable username;
+@property (nonatomic, strong) Post  * _Nullable post;
+
+
++ (void) postUserComment: ( NSString * _Nullable )text withUsername: ( NSString * _Nullable ) username withPost: ( Post * _Nullable ) post  withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

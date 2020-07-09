@@ -12,34 +12,19 @@
 
 @dynamic username;
 @dynamic text;
-@dynamic profile;
+@dynamic post;
 
 + (nonnull NSString *)parseClassName {
     return @"Comment";
 }
 
-+ (void) postUserComment: ( UIImage * _Nullable )profile withText: ( NSString * _Nullable )text withUsername: ( NSString * _Nullable ) username withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) postUserComment: ( NSString * _Nullable )text withUsername: ( NSString * _Nullable ) username withPost: ( Post * _Nullable ) post  withCompletion: (PFBooleanResultBlock  _Nullable)completion{
     
     Comment *newComment = [Comment new];
-    newComment.profile = [self getPFFileFromImage:profile];
     newComment.username = [PFUser currentUser].username;
     newComment.text = text;
+    newComment.post = post;
     [newComment saveInBackgroundWithBlock: completion];
-}
-
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
-    // check if image is not nil
-    if (!image) {
-        NSLog(@"Image is nil");
-        return nil;
-    }
-    NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
-    if (!imageData) {
-        NSLog(@"Image data is nil");
-        return nil;
-    }
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
 @end

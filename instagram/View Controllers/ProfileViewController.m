@@ -58,7 +58,7 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
-    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(50, 50)];
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(10, 10)];
     self.pickerView = [self getPFFileFromImage:editedImage];
     [PFUser.currentUser setObject:self.pickerView forKey:@"profilePic"];
     [PFUser.currentUser saveInBackground];

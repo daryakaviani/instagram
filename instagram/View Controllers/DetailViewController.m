@@ -10,14 +10,24 @@
 #import <Parse/Parse.h>
 #import "PFImageView.h"
 #import <DateTools.h>
+#import "Comment.h"
+#import "CommentCell.h"
 
-@interface DetailViewController ()
+@interface DetailViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet PFImageView *postImage;
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *captionLabel;
 @property (weak, nonatomic) IBOutlet UILabel *likesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
+@property (weak, nonatomic) IBOutlet UITextField *commentField;
+@property (weak, nonatomic) IBOutlet UIButton *commentButton;
+@property (weak, nonatomic) IBOutlet UILabel *commentLabel;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
+@property (nonatomic, strong) NSArray *posts;
+@property (nonatomic, strong) NSArray *comments;
+
 
 @end
 
@@ -25,9 +35,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.captionLabel.text = self.post[@"caption"];
-    self.postImage.file = self.post[@"image"];
-    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post[@"likeCount"]];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    [self fetchComments];
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchComments) forControlEvents:UIControlEventValueChanged];
+    [self.tableView insertSubview:self.refreshControl atIndex:0];
+    [self.tableView setSeparatorStyle:UITableViewCellSeparatorStyleNone];
+    self.captionLabel.text = self.post.caption;
+    self.postImage.file = self.post.image;
+    self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
+    self.commentLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount, nil];
     NSDate *tempTime = self.post.createdAt;
     NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime]; 
     self.timestampLabel.text = timeAgo.timeAgoSinceNow;
@@ -46,6 +65,55 @@
         // No user found, set default username
         self.usernameLabel.text = @"🤖";
     }
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)fetchComments {
+    // construct query
+    PFQuery *query = [PFQuery queryWithClassName:@"Comment"];
+    [query orderByDescending:@"createdAt"];
+//    [query includeKey:@"author"];
+    [query whereKey:@"post" equalTo:self.post];
+    query.limit = 20;
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
+        if (comments != nil) {
+            self.comments = comments;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    CommentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"CommentCell"];
+    //cell.delegate = self;
+    cell.preservesSuperviewLayoutMargins = false;
+    cell.separatorInset = UIEdgeInsetsZero;
+    cell.layoutMargins = UIEdgeInsetsZero;
+    Comment *comment = self.comments[indexPath.row];
+    cell.comment = comment;
+    [cell setComment:comment];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.comments.count;
+}
+
+
+- (IBAction)commentButton:(id)sender {
+    [Comment postUserComment:self.commentField.text withUsername:[PFUser currentUser].username withPost:self.post withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+        self.commentField.text = @"";
+    }];
+    [self fetchComments];
+    [self viewDidLoad];
+    [self.tableView reloadData];
 }
 
 - (IBAction)likeButton:(id)sender {
