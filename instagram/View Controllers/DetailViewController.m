@@ -46,7 +46,6 @@
     self.captionLabel.text = self.post.caption;
     self.postImage.file = self.post.image;
     self.likesLabel.text = [NSString stringWithFormat:@"%@", self.post.likeCount];
-    self.commentLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount, nil];
     NSDate *tempTime = self.post.createdAt;
     NSDate *timeAgo = [NSDate dateWithTimeInterval:0 sinceDate:tempTime]; 
     self.timestampLabel.text = timeAgo.timeAgoSinceNow;
@@ -81,6 +80,7 @@
     [query findObjectsInBackgroundWithBlock:^(NSArray *comments, NSError *error) {
         if (comments != nil) {
             self.comments = comments;
+            self.commentLabel.text = [NSString stringWithFormat:@"%@", self.post.commentCount, nil];
             [self.tableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -121,11 +121,15 @@
     if (self.post.liked) {
         self.post.liked = NO;
         self.likeButton.selected = YES;
-//        self.post.likeCount.integerValue -= 1;
+        int val = [self.post.likeCount intValue];
+        self.post.likeCount = [NSNumber numberWithInt:(val - 1)];
+        [self.post saveInBackground];
     } else {
         self.post.liked = YES;
         self.likeButton.selected = NO;
-//        self.post.likeCount.integerValue += 1;
+        int val = [self.post.likeCount intValue];
+        self.post.likeCount = [NSNumber numberWithInt:(val + 1)];
+        [self.post saveInBackground];
     }
     [self refreshLikeData];
 }

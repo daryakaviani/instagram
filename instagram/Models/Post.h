@@ -11,7 +11,7 @@
 @property (nonatomic, strong) PFFileObject  * _Nullable image;
 @property (nonatomic, strong) NSNumber  * _Nullable likeCount;
 @property (nonatomic, strong) NSNumber  * _Nullable commentCount;
-@property (nonatomic) BOOL liked;
+@property (nonatomic) PFRelation * _Nullable likedBy;
 
 + (void) postUserImage: ( UIImage * _Nullable )image withCaption: ( NSString * _Nullable )caption withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
