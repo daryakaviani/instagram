@@ -77,7 +77,7 @@
             <objects>
                 <viewController id="FLs-8Q-kew" customClass="ComposeViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="iKf-aZ-RsL">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="image_placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="MFs-go-xKL">
@@ -110,11 +110,12 @@
                     <connections>
                         <outlet property="captionField" destination="UlC-Pu-dJh" id="Ekf-gL-lvC"/>
                         <outlet property="pickerView" destination="MFs-go-xKL" id="81J-hD-X26"/>
+                        <segue destination="xNF-ec-XSQ" kind="presentation" identifier="photoSegue" id="RfU-Nd-ag6"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EHc-oY-4xP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042.0289855072465" y="756.69642857142856"/>
+            <point key="canvasLocation" x="996" y="802"/>
         </scene>
         <!--Feed View Controller-->
         <scene sceneID="Gl9-6A-htV">
@@ -208,7 +209,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bie-DN-DpB" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1514" y="94"/>
+            <point key="canvasLocation" x="1513.0434782608697" y="93.75"/>
         </scene>
         <!--Detail View Controller-->
         <scene sceneID="bCA-ns-0ne">
@@ -376,6 +377,53 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YQp-Kv-Bcw" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2350.7246376811595" y="93.75"/>
+        </scene>
+        <!--Photo View Controller-->
+        <scene sceneID="QgI-V7-ljN">
+            <objects>
+                <viewController id="xNF-ec-XSQ" customClass="PhotoViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="yHJ-S5-Hed">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8O7-aa-HJh" userLabel="Take Photo">
+                                <rect key="frame" x="169" y="723" width="77" height="77"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="image_placeholder"/>
+                                <connections>
+                                    <action selector="didTakePhoto:" destination="xNF-ec-XSQ" eventType="touchUpInside" id="fSP-ER-4To"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QQ8-dy-gGE" userLabel="Preview View">
+                                <rect key="frame" x="0.0" y="20" width="414" height="665"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </view>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Tg2-s6-gYl" userLabel="Captured Image">
+                                <rect key="frame" x="0.0" y="613" width="135" height="187"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8O-Lq-6YI">
+                                <rect key="frame" x="289" y="722" width="78" height="78"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button" image="check"/>
+                                <connections>
+                                    <action selector="selectButton:" destination="xNF-ec-XSQ" eventType="touchUpInside" id="JuL-s6-VxF"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="BfL-D2-ffh"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="EiS-bg-9p9"/>
+                    <connections>
+                        <outlet property="capturedView" destination="Tg2-s6-gYl" id="Wso-Nf-wEx"/>
+                        <outlet property="previewView" destination="QQ8-dy-gGE" id="W0y-8l-qwP"/>
+                        <segue destination="FLs-8Q-kew" kind="show" identifier="photoSelected" id="syq-61-bsN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TB9-My-3S4" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3128.985507246377" y="93.75"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="S4y-IN-hzb">
@@ -558,10 +606,12 @@
     <inferredMetricsTieBreakers>
         <segue reference="AEa-gB-3m2"/>
         <segue reference="KOb-Jh-5qU"/>
+        <segue reference="syq-61-bsN"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Words" width="1200" height="429"/>
         <image name="arrowshape.turn.up.right.circle" catalog="system" width="128" height="121"/>
+        <image name="check" width="170.66667175292969" height="170.66667175292969"/>
         <image name="feed_tab" width="25" height="25"/>
         <image name="heart" catalog="system" width="128" height="109"/>
         <image name="heart.fill" catalog="system" width="128" height="109"/>

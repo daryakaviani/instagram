@@ -14,6 +14,7 @@
 		4B64D5A524B3DC8300932769 /* Post.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D5A424B3DC8300932769 /* Post.m */; };
 		4B64D5A924B3DEDB00932769 /* ComposeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B64D5A824B3DEDB00932769 /* ComposeViewController.m */; };
 		4B9D3BB124B429F200AD3540 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4B9D3BB024B429F200AD3540 /* PostCell.m */; };
+		4BA934FD24B7C075000A5B7C /* PhotoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BA934FC24B7C075000A5B7C /* PhotoViewController.m */; };
 		4BC3C0F624B3CAEB00C201F9 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */; };
 		4BC3C0F924B3D34A00C201F9 /* FeedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BC3C0F824B3D34A00C201F9 /* FeedViewController.m */; };
 		4BD001AD24B3B0FF00208201 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BD001AC24B3B0FF00208201 /* AppDelegate.m */; };
@@ -63,6 +64,8 @@
 		4B64D5A824B3DEDB00932769 /* ComposeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ComposeViewController.m; sourceTree = "<group>"; };
 		4B9D3BAF24B429F200AD3540 /* PostCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
 		4B9D3BB024B429F200AD3540 /* PostCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
+		4BA934FB24B7C075000A5B7C /* PhotoViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PhotoViewController.h; sourceTree = "<group>"; };
+		4BA934FC24B7C075000A5B7C /* PhotoViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PhotoViewController.m; sourceTree = "<group>"; };
 		4BC3C0F424B3CAEB00C201F9 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		4BC3C0F524B3CAEB00C201F9 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		4BC3C0F724B3D34A00C201F9 /* FeedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FeedViewController.h; sourceTree = "<group>"; };
@@ -160,6 +163,8 @@
 				4BE5508624B514C6007E819C /* DetailViewController.m */,
 				4B546C9524B638AE00468981 /* ProfileViewController.h */,
 				4B546C9624B638AE00468981 /* ProfileViewController.m */,
+				4BA934FB24B7C075000A5B7C /* PhotoViewController.h */,
+				4BA934FC24B7C075000A5B7C /* PhotoViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -497,6 +502,7 @@
 				4B64D5A924B3DEDB00932769 /* ComposeViewController.m in Sources */,
 				4BD001BE24B3B10000208201 /* main.m in Sources */,
 				4BD001B024B3B0FF00208201 /* SceneDelegate.m in Sources */,
+				4BA934FD24B7C075000A5B7C /* PhotoViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

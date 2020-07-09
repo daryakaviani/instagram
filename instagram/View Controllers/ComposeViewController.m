@@ -10,6 +10,7 @@
 #import <UIKit/UIKit.h>
 #import "Post.h"
 #import "MBProgressHUD.h"
+#import "PhotoViewController.h"
 
 @interface ComposeViewController ()<UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *pickerView;
@@ -24,6 +25,7 @@
     UITapGestureRecognizer *profileTapGestureRecognizer = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(openImagePicker)];
     [self.pickerView addGestureRecognizer:profileTapGestureRecognizer];
     [self.pickerView setUserInteractionEnabled:YES];
+    [NSNotificationCenter.defaultCenter addObserver:self selector:@selector(setImage:) name:@"selectedImage" object:nil];
 }
 
 - (IBAction)shareButton:(id)sender {
@@ -62,7 +64,8 @@
     imagePickerVC.delegate = self;
     imagePickerVC.allowsEditing = YES;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+//        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+        [self performSegueWithIdentifier:@"photoSegue" sender:nil];
     }
     else {
         NSLog(@"Camera 🚫 available so we will use photo library instead");
@@ -71,10 +74,23 @@
     [self presentViewController:imagePickerVC animated:YES completion:nil];
 }
 
+- (void) setImage:(NSNotification *) notification {
+    NSDictionary *dict = notification.userInfo;
+    self.selectedView = [dict valueForKey:@"image"];
+    UIImage *originalImage = self.selectedView.image;
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(1, 1)];
+    [self.pickerView setImage:editedImage];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
+    UIImage *originalImage;
+    if (self.selectedView != nil) {
+        originalImage = self.selectedView.image;
+    } else {
+        originalImage = info[UIImagePickerControllerOriginalImage];
+    }
     // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(50, 50)];
     
     [self.pickerView setImage:editedImage];
@@ -83,14 +99,10 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
-*/
 
 @end
