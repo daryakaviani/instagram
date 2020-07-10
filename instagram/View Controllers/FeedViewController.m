@@ -13,6 +13,8 @@
 #import "PFImageView.h"
 #import "ProfileViewController.h"
 #import "InfiniteScrollActivityView.h"
+#import "SceneDelegate.h"
+#import "LoginViewController.h"
 
 @interface FeedViewController ()<UITableViewDelegate, UITableViewDataSource, PostCellDelegate, UIScrollViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -47,9 +49,18 @@ int skip = 20;
 }
 
 - (IBAction)logoutButton:(id)sender {
+    SceneDelegate *myDelegate = (SceneDelegate *)self.view.window.windowScene.delegate;
+
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
+        PFUser *test = [PFUser currentUser];
+        
+        NSLog(@" -- User is logged out -- %@", test.username);
     }];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    myDelegate.window.rootViewController = loginViewController;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,7 +126,6 @@ int skip = 20;
     [query includeKey:@"author"];
     query.limit = 20;
     query.skip = skip;
-
     // fetch data asynchronously
     [query findObjectsInBackgroundWithBlock:^(NSArray *posts, NSError *error) {
         if (posts != nil) {
@@ -145,10 +155,13 @@ int skip = 20;
              // Update position of loadingMoreView, and start loading indicator
              CGRect frame = CGRectMake(0, self.tableView.contentSize.height, self.tableView.bounds.size.width, InfiniteScrollActivityView.defaultHeight);
              loadingMoreView.frame = frame;
-             [loadingMoreView startAnimating];
              
              // Code to load more results
-             [self loadMoreData];
+             bool isAtLeast20 = self.posts.count >= 20;
+             if (isAtLeast20) {
+                 [loadingMoreView startAnimating];
+                 [self loadMoreData];
+             }
          }
      }
 }
@@ -159,8 +172,8 @@ int skip = 20;
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     UITableViewCell *tappedCell = sender;
     NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-    Post *post = self.posts[indexPath.row];
       if ([segue.identifier isEqualToString:@"detailSegue"]) {
+          Post *post = self.posts[indexPath.row];
           DetailViewController *detailViewController = [segue destinationViewController];
           detailViewController.post = post;
       } else if ([segue.identifier isEqualToString:@"profileSegue"]) {

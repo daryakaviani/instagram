@@ -8,6 +8,8 @@
 
 #import "AppDelegate.h"
 #import "Parse/Parse.h"
+#import <IQKeyboardManager/IQKeyboardManager.h>
+#import <IQKeyboardManager.h>
 
 @interface AppDelegate ()
 
@@ -17,9 +19,10 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+   [IQKeyboardManager sharedManager].enable = YES;
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        configuration.applicationId = @"myAppId";
-        configuration.server = @"http://darya-instagram.herokuapp.com/parse";
+        configuration.applicationId = @"myDaryaApp";
+        configuration.server = @"http://darya-tryingmybest.herokuapp.com/parse";
     }];
     
     [Parse initializeWithConfiguration:config];

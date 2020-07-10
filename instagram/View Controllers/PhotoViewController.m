@@ -83,7 +83,7 @@
     if (imageData) {
         UIImage *image = [UIImage imageWithData:imageData];
         // Add the image to captureImageView here...
-        UIImage *resizeImage = [self resizeImage:image withSize:CGSizeMake(100, 100)];
+        UIImage *resizeImage = [self resizeImage:image withSize:CGSizeMake(414, 414)];
         self.capturedView.image = resizeImage;
     }
 }

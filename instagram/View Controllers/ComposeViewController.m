@@ -78,8 +78,8 @@
     NSDictionary *dict = notification.userInfo;
     self.selectedView = [dict valueForKey:@"image"];
     UIImage *originalImage = self.selectedView.image;
-    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(1, 1)];
-    [self.pickerView setImage:editedImage];
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(414, 414)];
+    [self.pickerView setImage:originalImage];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -91,7 +91,7 @@
         originalImage = info[UIImagePickerControllerOriginalImage];
     }
     // Get the image captured by the UIImagePickerController
-    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(50, 50)];
+    UIImage *editedImage = [self resizeImage:originalImage withSize:CGSizeMake(414, 414)];
     
     [self.pickerView setImage:editedImage];
     
