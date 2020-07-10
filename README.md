@@ -58,6 +58,7 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 - [DateTools](https://github.com/MatthewYork/DateTools) - calculates the time ago from now
 - [MBProgressHUD](https://github.com/jdg/MBProgressHUD) - activity indicators
 - [IQKeyboardManager](https://github.com/hackiftekhar/IQKeyboardManager) - pushes views up with the keyboard
+- [FlatIcon](flaticon.com) - icons
 
 ## Notes
 
